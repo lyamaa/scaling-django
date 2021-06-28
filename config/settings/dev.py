@@ -14,8 +14,8 @@ DATABASES = {
 }
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR.parent / "staticfiles"  # for collect static
+STATIC_URL = "/staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR.parent, "staticfiles")
 
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/"
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = os.path.join(BASE_DIR.parent, "mediafiles")

@@ -4,15 +4,18 @@ services:
   scale:
     restart: always
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
-    ports:
-      - 8000:8000
+      - static_volume:/code/staticfiles
+      - media_volume:/code/mediafiles
+    expose:
+      - 8000
     env_file:
       - ./.env
     depends_on:
       - db
+      - redis
   db:
     image: "postgres:11"
     volumes:
@@ -23,6 +26,24 @@ services:
       - POSTGRES_USER=scale
       - POSTGRES_PASSWORD=scale
       - POSTGRES_DB=scale
+  redis:
+    image: redis
+    ports:
+      - 63799:6379
+    restart: on-failure
+
+  nginx:
+    build: ./nginx
+    restart: always
+    volumes:
+      - static_volume:/code/staticfiles
+      - media_volume:/code/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - scale
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:

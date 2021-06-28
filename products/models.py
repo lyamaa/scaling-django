@@ -18,7 +18,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(_("Product Name"), max_length=255)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.DO_NOTHING)
 
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10)
@@ -27,7 +27,7 @@ class Product(models.Model):
     image = models.URLField(max_length=255)
 
     class Meta:
-        ordering = ("name",)
+        ordering = ("id",)
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
 

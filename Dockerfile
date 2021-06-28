@@ -30,3 +30,6 @@ RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
 
+CMD python manage.py collectstatic --no-input --clear
+# run entrypoint.sh
+# ENTRYPOINT ["/code/entrypoint.sh"]
