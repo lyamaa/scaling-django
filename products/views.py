@@ -63,13 +63,16 @@ class ProductListApiView(APIView):
         paginator = PageNumberPagination()
         paginator.page_size = 10
 
+        # get products from cache if exists
         products = cache.get('products_data')
 
+        #  if products does not exists on cache create it
         if not products:
             time.sleep(5)
             products = list(Product.objects.select_related('category'))
             cache.set('products_data', products, timeout=60 * 30)
 
+        # paginating cache products
         result = paginator.paginate_queryset(products, request)
 
         serializer = ReadProductSerializer(result, many=True)
@@ -83,6 +86,9 @@ class ProductViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
+        # get cache of products
+        #  if exists
+        #  delete cache
         for key in cache.keys('*'):
             if 'products_data' in key:
                 cache.delete(key)
