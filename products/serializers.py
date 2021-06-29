@@ -1,6 +1,3 @@
-from django.db import models
-from django.db.models import fields
-from django.db.models.query import QuerySet
 from rest_framework import serializers
 from rest_framework.relations import StringRelatedField
 from .models import Product, Category

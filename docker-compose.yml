@@ -39,7 +39,7 @@ services:
       - static_volume:/code/staticfiles
       - media_volume:/code/mediafiles
     ports:
-      - 1337:80
+      - 2000:80
     depends_on:
       - scale
   # elasticsearch:

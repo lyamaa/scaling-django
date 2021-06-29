@@ -2,11 +2,9 @@
 from rest_framework.views import APIView
 from products.models import Category, Product
 from rest_framework import (
-    serializers,
     viewsets,
     status,
 )
-from django.core import paginator
 from rest_framework.pagination import PageNumberPagination
 import time
 from .serializers import CategorySerializers, ProductSerializers, ReadProductSerializer
