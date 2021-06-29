@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from rest_framework.relations import StringRelatedField
+
 from .models import Product, Category
 
 
@@ -26,9 +26,10 @@ class ProductSerializers(serializers.ModelSerializer):
 
 class ReadProductSerializer(serializers.ModelSerializer):
 
-    category = StringRelatedField(read_only=True)
-    # category = CategoryRelatedField()
+    # category = serializers.StringRelatedField(read_only=True)
+    category = CategoryRelatedField()
     # category = CategorySerializers()
+    # category = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Product

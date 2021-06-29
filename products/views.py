@@ -14,10 +14,6 @@ from rest_framework.response import Response
 from django.core.cache import cache
 
 
-class CustomPagination(PageNumberPagination):
-    page_size = 10
-
-
 class CategoryViewSet(viewsets.ViewSet):
 
     def list(self, request):
@@ -57,6 +53,7 @@ class CategoryViewSet(viewsets.ViewSet):
 
 
 class ProductListApiView(APIView):
+
     def get(self, request):
         paginator = PageNumberPagination()
         paginator.page_size = 10
